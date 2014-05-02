@@ -8,7 +8,7 @@ var chokidar = require( 'chokidar' ),
 		.describe( 'help', 'Print usage and quit.' )
 		.alias( 'h', 'host' )
 		.default( 'h', 'http://localhost:4502' )
-		.describe( 'h', 'Remote server address' )
+		.describe( 'h', 'Remote host' )
 		.alias( 'u', 'username' )
 		.describe( 'u', 'Username' )
 		.default( 'u', 'admin' )
@@ -16,7 +16,7 @@ var chokidar = require( 'chokidar' ),
 		.describe( 'p', 'Password' )
 		.default( 'p', 'admin' )
 		.alias( 'f', 'filter' )
-		.describe( 'f', 'Filter' )
+		.describe( 'f', 'The path to your META-INF/vault/filter.xml file.' )
 		.default( 'f', '' ),
 	argv = yargs.argv;
 
