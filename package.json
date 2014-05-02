@@ -1,0 +1,16 @@
+{
+  "name": "vlt-watch",
+  "version": "0.0.0",
+  "description": "Watch a directory for changes, and use vault to update your remote JCR root.",
+  "main": "vlt-watch.js",
+  "author": "Jay Proulx",
+  "license": "ISC",
+  "bin": {
+    "vlt-watch": "vlt-watch.js"
+  },
+  "dependencies": {
+    "chokidar": "~0.8.2",
+    "yargs": "~1.2.1",
+    "colors": "~0.6.2"
+  }
+}
