@@ -1,6 +1,6 @@
 {
   "name": "vlt-watch",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Watch a directory for changes, and use vault to update your remote JCR root.",
   "main": "vlt-watch.js",
   "author": "Jay Proulx",

@@ -35,14 +35,18 @@ Installation
 Usage
 -----
 
+From your ```jcr_root``` folder, run the vlt-watch tool.
+
+todo: Allow specifying a path to the jcr_root folder, default shoudl be ```.```.
+
 ```
 Watch the filesystem for changes and sync them with the remote JCR.
 Usage: vlt-watch
 
 Options:
-  --help          Print usage and quit.
-  -h, --host      Remote server address  [default: "http://localhost:4502"]
-  -u, --username  Username               [default: "admin"]
-  -p, --password  Password               [default: "admin"]
-  -f, --filter    Filter                 [default: ""]
+  --help          Print usage and quit.                           
+  -h, --host      Remote host                                       [default: "http://localhost:4502"]
+  -u, --username  Username                                          [default: "admin"]
+  -p, --password  Password                                          [default: "admin"]
+  -f, --filter    The path to your META-INF/vault/filter.xml file.  [default: ""]
 ```
