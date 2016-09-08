@@ -12,10 +12,13 @@ Installation
 
     * [Follow the Adobe Experience Manager docs](http://dev.day.com/docs/en/crx/current/how_to/how_to_use_the_vlttool.html#Installing%20the%20vlt%20tool)
 
-1. **From the JackRabbit FileFault project**
+1. **From the JackRabbit FileVault project**
 
     * [See the Apache FileVault project page](http://jackrabbit.apache.org/filevault/)
 
+1. **With Homebrew on Mac
+
+    * [See Hombrew Documentation](brew.sh) `brew install vault-cli`
 
 **Make sure it's accessible on the command line.**
 
@@ -26,7 +29,7 @@ Installation
 
 ### Step 2: Download and install the vlt-watch tool
 
-(Install Node.js first if you haven't already)
+(Install [Node.js](https://nodejs.org) first if you haven't already)
 
 ```
 # npm install -g vlt-watch
