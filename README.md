@@ -3,6 +3,8 @@ vlt-watch
 
 vlt-watch watches a local folder for changes as you work, automatically adding and removing files from a remote JCR so you don't have to think about it.
 
+This is a lightweight alternative to [Brackets](http://brackets.io/) for AEM development.
+
 Installation
 ------------
 
@@ -40,8 +42,6 @@ Usage
 
 From your ```jcr_root``` folder, run the vlt-watch tool.
 
-todo: Allow specifying a path to the jcr_root folder, default shoudl be ```.```.
-
 ```
 Watch the filesystem for changes and sync them with the remote JCR.
 Usage: vlt-watch
@@ -52,4 +52,6 @@ Options:
   -u, --username  Username                                          [default: "admin"]
   -p, --password  Password                                          [default: "admin"]
   -f, --filter    The path to your META-INF/vault/filter.xml file.  [default: ""]
+  -c, --clean     Removes the .vlt files on exit.
+  -r, --jcr_root  The Path of the jcr_root folder.                  [default: "."]
 ```
