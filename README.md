@@ -18,9 +18,9 @@ Installation
 
     * [See the Apache FileVault project page](http://jackrabbit.apache.org/filevault/)
 
-1. **With Homebrew on Mac
+1. **With Homebrew on Mac**
 
-    * [See Hombrew Documentation](brew.sh) `brew install vault-cli`
+    * `brew install vault-cli` [See Hombrew Documentation](brew.sh) 
 
 **Make sure it's accessible on the command line.**
 
@@ -44,14 +44,14 @@ From your ```jcr_root``` folder, run the vlt-watch tool.
 
 ```
 Watch the filesystem for changes and sync them with the remote JCR.
-Usage: vlt-watch
+Usage: vlt-watch.js
 
 Options:
-  --help          Print usage and quit.                           
-  -h, --host      Remote host                                       [default: "http://localhost:4502"]
-  -u, --username  Username                                          [default: "admin"]
-  -p, --password  Password                                          [default: "admin"]
-  -f, --filter    The path to your META-INF/vault/filter.xml file.  [default: ""]
-  -c, --clean     Removes the .vlt files on exit.
-  -r, --jcr_root  The Path of the jcr_root folder.                  [default: "."]
+  -h, --host      Remote host                 [default: "http://localhost:4502"]
+  -u, --username  Username                                    [default: "admin"]
+  -p, --password  Password                                    [default: "admin"]
+  -r, --jcr_root  The path to your jcr_root folder                [default: "."]
+  -c, --clean     Clean up .vlt files on exit                          [boolean]
+  -f, --filter    The path to your META-INF/vault/filter.xml file. [default: ""]
+  -H, --help      Print usage and quit.
 ```
