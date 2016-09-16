@@ -101,7 +101,7 @@ var VltWatch = {
 	},
 
 	checkout: function ( callback ) {
-		VltWatch.exec( VltWatch.commands.checkout, undefined, callback );
+		VltWatch.exec( VltWatch.commands.checkout, { "maxBuffer": 1000000 }, callback );
 	},
 
 	add: function ( path, callback ) {
