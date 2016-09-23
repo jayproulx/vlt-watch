@@ -2,6 +2,9 @@
 
 var chokidar = require( 'chokidar' ),
 	cp = require( 'child_process' ),
+	colors = require('colors'),
+	glob = require('glob'),
+	fs = require('fs'),
 	yargs = require( 'yargs' )
 		.usage( 'Watch the filesystem for changes and sync them with the remote JCR.\nUsage: $0' )
 		.alias( 'H', 'help' )
@@ -15,6 +18,12 @@ var chokidar = require( 'chokidar' ),
 		.alias( 'p', 'password' )
 		.describe( 'p', 'Password' )
 		.default( 'p', 'admin' )
+		.alias( 'r', 'jcr_root' )
+		.default( 'r', '.' )
+		.describe( 'r', 'The path to your jcr_root folder' )
+    .boolean( 'c' )
+		.alias( 'c', 'clean')
+		.describe( 'c', 'Clean up .vlt files on exit')
 		.alias( 'f', 'filter' )
 		.describe( 'f', 'The path to your META-INF/vault/filter.xml file.' )
 		.default( 'f', '' ),
@@ -25,26 +34,49 @@ if ( argv.H ) {
 	process.exit( 0 );
 }
 
+if (process.platform === "win32") {
+  var rl = require("readline").createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+  rl.on("SIGINT", function () {
+    process.emit("SIGINT");
+  });
+}
+
+process.on("SIGINT", function () {
+	  //graceful shutdown
+  process.exit();
+});
+
 process.on( 'exit', function ( code ) {
-	// todo: clean up all of the .vlt files that vault creates.
-} );
+	// Clean up all the .vlt files created by Vault.
+	if (argv.clean) {
+		files = glob.sync('**/.vlt', { cwd: argv.jcr_root });
+		for (vltFile of files) {
+			fs.unlinkSync(vltFile);
+		}
+		console.log("Cleaned up %d .vlt files".green, files.length);
+	}
+});
 
 var VltWatch = {
 	commands: {
-		'checkout': 'vlt --credentials ' + argv.username + ':' + argv.password + ' checkout' + (argv.filter ? (' -f ' + argv.filter) : '') + ' --force ' + argv.host + '/crx',
+		'checkout': 'vlt --credentials ' + argv.username + ':' + argv.password + ' checkout' + (argv.filter ? (' -f ' + argv.filter) : '') + ' --force ' + argv.host + '/crx ' + argv.jcr_root,
 		'add': 'vlt add ',
 		'rm': 'vlt rm ',
 		'ci': 'vlt ci'
 	},
 
-	watcher: chokidar.watch( '.', {
+	watcher: chokidar.watch( argv.jcr_root, {
 		ignored: /(\.vlt|\.swp)/,
 		persistent: true,
 		ignoreInitial: true
 	} ),
 
 	exec: function ( cmd, options, callback ) {
-		console.log( cmd );
+		console.log( cmd.green );
 
 		return cp.exec( cmd, options, function ( error, stdout, stderr ) {
 			if ( stdout ) {
@@ -91,7 +123,9 @@ var VltWatch = {
 
 module.exports = VltWatch;
 
+console.log("Checking out vault...");
 VltWatch.checkout( function () {
+	console.log("Ready.".green);
 	VltWatch.watcher
 		.on( 'add', function ( path ) {
 			VltWatch.add( path );
